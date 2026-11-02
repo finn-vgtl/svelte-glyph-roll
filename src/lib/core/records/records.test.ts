@@ -1,11 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { RollingNumberAlignment, TransitionDirection } from "../enums";
+import { GlyphRollAlignment, TransitionDirection } from "../enums";
 import {
-	createRollingNumberSpec,
+	createGlyphRollSpec,
+	type GlyphRollSpec,
 	isBlurActive,
 	isDigitUnit,
-	type RollingNumberSpec,
 	specsEqual,
 	TRANSITION_SHAPE_DEFAULTS,
 } from ".";
@@ -20,19 +20,19 @@ describe("isDigitUnit", () => {
 	});
 });
 
-describe("createRollingNumberSpec", () => {
+describe("createGlyphRollSpec", () => {
 	it("does not share the shape between specs", () => {
-		const spec = createRollingNumberSpec();
+		const spec = createGlyphRollSpec();
 		spec.shape.enterScale = 2;
-		expect(createRollingNumberSpec().shape.enterScale).toBe(
+		expect(createGlyphRollSpec().shape.enterScale).toBe(
 			TRANSITION_SHAPE_DEFAULTS.enterScale,
 		);
 	});
 });
 
 describe("isBlurActive", () => {
-	const spec = (blurIntensity: number): RollingNumberSpec => {
-		const base = createRollingNumberSpec();
+	const spec = (blurIntensity: number): GlyphRollSpec => {
+		const base = createGlyphRollSpec();
 		return { ...base, shape: { ...base.shape, blurIntensity } };
 	};
 
@@ -47,14 +47,12 @@ describe("isBlurActive", () => {
 
 describe("specsEqual", () => {
 	it("is true for structurally equal specs", () => {
-		expect(
-			specsEqual(createRollingNumberSpec(), createRollingNumberSpec()),
-		).toBe(true);
+		expect(specsEqual(createGlyphRollSpec(), createGlyphRollSpec())).toBe(true);
 	});
 
-	const changes: [string, (spec: RollingNumberSpec) => void][] = [
+	const changes: [string, (spec: GlyphRollSpec) => void][] = [
 		["text", (spec) => (spec.text = "1")],
-		["alignment", (spec) => (spec.alignment = RollingNumberAlignment.Center)],
+		["alignment", (spec) => (spec.alignment = GlyphRollAlignment.Center)],
 		["direction", (spec) => (spec.direction = TransitionDirection.Down)],
 		["decimalSeparator", (spec) => (spec.decimalSeparator = ",")],
 		["clipEnabled", (spec) => (spec.clipEnabled = false)],
@@ -67,9 +65,9 @@ describe("specsEqual", () => {
 		["shape.travelRatio", (spec) => (spec.shape.travelRatio = 1)],
 	];
 
-	// A field that specsEqual skips makes RollingNumberLabel ignore updates to it.
+	// A field that specsEqual skips makes GlyphRollLabel ignore updates to it.
 	it("covers every field of the spec", () => {
-		const { shape, ...rest } = createRollingNumberSpec();
+		const { shape, ...rest } = createGlyphRollSpec();
 		const fields = [
 			...Object.keys(rest),
 			...Object.keys(shape).map((key) => `shape.${key}`),
@@ -78,9 +76,9 @@ describe("specsEqual", () => {
 	});
 
 	it.each(changes)("detects a change to %s", (_, change) => {
-		const changed = createRollingNumberSpec();
+		const changed = createGlyphRollSpec();
 		change(changed);
-		expect(specsEqual(createRollingNumberSpec(), changed)).toBe(false);
-		expect(specsEqual(changed, createRollingNumberSpec())).toBe(false);
+		expect(specsEqual(createGlyphRollSpec(), changed)).toBe(false);
+		expect(specsEqual(changed, createGlyphRollSpec())).toBe(false);
 	});
 });

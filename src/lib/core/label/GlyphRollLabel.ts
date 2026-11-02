@@ -6,8 +6,8 @@ import {
 } from "../glyphs";
 import { FINGERPRINT_PROBE, GlyphTypesetter } from "../glyphs/GlyphTypesetter";
 import {
-	createRollingNumberSpec,
-	type RollingNumberSpec,
+	createGlyphRollSpec,
+	type GlyphRollSpec,
 	specsEqual,
 } from "../records";
 
@@ -130,7 +130,7 @@ const createGlyphNode = (unit: string): GlyphNode => {
 	};
 };
 
-class RollingNumberLabel {
+class GlyphRollLabel {
 	onContentSizeChange: ((size: ContentSize) => void) | null = null;
 
 	private readonly engine = new GlyphTransitionEngine();
@@ -144,7 +144,7 @@ class RollingNumberLabel {
 	private lastTimestamp = 0;
 	private reportedSize: ContentSize | null = null;
 
-	private spec: RollingNumberSpec = createRollingNumberSpec();
+	private spec: GlyphRollSpec = createGlyphRollSpec();
 	private typesetter: GlyphTypesetter | null = null;
 
 	constructor(private readonly host: HTMLElement) {
@@ -179,7 +179,7 @@ class RollingNumberLabel {
 		}
 	}
 
-	update(spec: RollingNumberSpec): void {
+	update(spec: GlyphRollSpec): void {
 		const typesetter = GlyphTypesetter.inheritingFrom(this.probe);
 		if (this.typesetter?.equals(typesetter) && specsEqual(spec, this.spec))
 			return;
@@ -201,7 +201,7 @@ class RollingNumberLabel {
 		if (!typesetter.equals(this.typesetter)) this.apply(this.spec, typesetter);
 	}
 
-	private apply(spec: RollingNumberSpec, typesetter: GlyphTypesetter): void {
+	private apply(spec: GlyphRollSpec, typesetter: GlyphTypesetter): void {
 		this.typesetter = typesetter;
 		this.spec = spec;
 
@@ -370,4 +370,4 @@ class RollingNumberLabel {
 	};
 }
 
-export { RollingNumberLabel };
+export { GlyphRollLabel };

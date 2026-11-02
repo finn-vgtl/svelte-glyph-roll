@@ -9,10 +9,10 @@ surrounding CSS.
 
 @example
 ```svelte
-<RollingNumber value={count} style="font-size: 48px" monospacedDigits />
+<GlyphRoll value={count} style="font-size: 48px" monospacedDigits />
 ```
 
-@see https://finn-vgtl.github.io/svelte-rolling-number
+@see https://finn-vgtl.github.io/svelte-glyph-roll
 -->
 
 <script lang="ts">
@@ -21,12 +21,12 @@ surrounding CSS.
 	import { TransitionSprings } from "./core/animation/TransitionSprings";
 	import { alignmentFromProp, directionFromProp } from "./core/enums";
 	import type { ContentSize } from "./core/glyphs";
-	import { RollingNumberLabel } from "./core/label/RollingNumberLabel";
+	import { GlyphRollLabel } from "./core/label/GlyphRollLabel";
 	import {
-		type RollingNumberSpec,
+		type GlyphRollSpec,
 		TRANSITION_SHAPE_DEFAULTS,
 	} from "./core/records";
-	import type { RollingNumberProps } from "./types";
+	import type { GlyphRollProps } from "./types";
 
 	const MAX_BLUR_INTENSITY = 8;
 	const MAX_ENTER_SCALE = 2;
@@ -53,15 +53,15 @@ surrounding CSS.
 		monospacedDigits,
 		style,
 		...rest
-	}: RollingNumberProps = $props();
+	}: GlyphRollProps = $props();
 
 	let host = $state<HTMLSpanElement>();
-	let label = $state.raw<RollingNumberLabel | null>(null);
+	let label = $state.raw<GlyphRollLabel | null>(null);
 	let contentSize = $state.raw<ContentSize | null>(null);
 
 	const text = $derived(typeof value === "number" ? String(value) : value);
 
-	const spec: RollingNumberSpec = $derived({
+	const spec: GlyphRollSpec = $derived({
 		text,
 		alignment: alignmentFromProp(alignment),
 		direction: directionFromProp(direction),
@@ -106,7 +106,7 @@ surrounding CSS.
 	$effect(() => {
 		if (!host) return;
 
-		const instance = new RollingNumberLabel(host);
+		const instance = new GlyphRollLabel(host);
 		instance.onContentSizeChange = (size) => (contentSize = size);
 		label = instance;
 

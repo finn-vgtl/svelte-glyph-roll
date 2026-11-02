@@ -1,9 +1,9 @@
 import type { HTMLAttributes } from "svelte/elements";
 
-type RollingNumberAlignment = "start" | "center" | "end";
-type RollingNumberDirection = "auto" | "up" | "down";
+type GlyphRollAlignment = "start" | "center" | "end";
+type GlyphRollDirection = "auto" | "up" | "down";
 
-interface RollingNumberTransitionProps {
+interface GlyphRollTransitionProps {
 	/**
 	 * Which way glyphs travel.
 	 *
@@ -13,7 +13,7 @@ interface RollingNumberTransitionProps {
 	 *
 	 * @default 'auto'
 	 */
-	direction?: RollingNumberDirection;
+	direction?: GlyphRollDirection;
 	/**
 	 * Nominal transition duration in milliseconds. Scales every internal spring, so the character of
 	 * the motion is preserved.
@@ -78,8 +78,8 @@ interface RollingNumberTransitionProps {
 	animated?: boolean;
 }
 
-interface RollingNumberProps
-	extends RollingNumberTransitionProps,
+interface GlyphRollProps
+	extends GlyphRollTransitionProps,
 		Omit<HTMLAttributes<HTMLSpanElement>, "children" | "color"> {
 	/** The text to display. Measuring, diffing and animating all happen per glyph. */
 	value: string | number;
@@ -88,7 +88,7 @@ interface RollingNumberProps
 	 *
 	 * @default 'start'
 	 */
-	alignment?: RollingNumberAlignment;
+	alignment?: GlyphRollAlignment;
 	/**
 	 * The character separating the whole and fractional parts. Characters are aligned around it, so
 	 * `123.45 → 123.46` only animates the final digit.
@@ -110,8 +110,8 @@ interface RollingNumberProps
 }
 
 export type {
-	RollingNumberAlignment,
-	RollingNumberDirection,
-	RollingNumberProps,
-	RollingNumberTransitionProps,
+	GlyphRollAlignment,
+	GlyphRollDirection,
+	GlyphRollProps,
+	GlyphRollTransitionProps,
 };

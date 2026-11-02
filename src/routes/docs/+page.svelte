@@ -115,22 +115,22 @@
 	];
 
 	const TYPES_EXAMPLE = `import type {
-	RollingNumberProps,
-	RollingNumberTransitionProps,
-	RollingNumberAlignment, // "start" | "center" | "end"
-	RollingNumberDirection, // "auto" | "up" | "down"
-} from "svelte-rolling-number";`;
+	GlyphRollProps,
+	GlyphRollTransitionProps,
+	GlyphRollAlignment, // "start" | "center" | "end"
+	GlyphRollDirection, // "auto" | "up" | "down"
+} from "svelte-glyph-roll";`;
 </script>
 
 <Seo
-	title="Documentation · svelte-rolling-number"
-	description="Install svelte-rolling-number and learn the RollingNumber component: formatting, animating text, direction, motion tuning, accessibility, server rendering and the full prop reference."
+	title="Documentation · svelte-glyph-roll"
+	description="Install svelte-glyph-roll and learn the GlyphRoll component: formatting, animating text, direction, motion tuning, accessibility, server rendering and the full prop reference."
 	path="/docs"
 />
 
 <h1>Documentation</h1>
 <p class="lead">
-	Everything you need to use <code>RollingNumber</code>, from installation to the full prop reference.
+	Everything you need to use <code>GlyphRoll</code>, from installation to the full prop reference.
 </p>
 
 <p class="group">Getting started</p>
@@ -138,8 +138,8 @@
 <section>
 	<h2 id="introduction">Introduction</h2>
 	<p>
-		<code>svelte-rolling-number</code> provides a single Svelte 5 component,
-		<code>RollingNumber</code>. It renders a line of text and, whenever its value changes, animates
+		<code>svelte-glyph-roll</code> provides a single Svelte 5 component,
+		<code>GlyphRoll</code>. It renders a line of text and, whenever its value changes, animates
 		each glyph that changed: departing glyphs roll out, scale down, blur and fade; arriving glyphs do
 		the reverse. Unchanged glyphs slide into their new positions.
 	</p>
@@ -181,7 +181,7 @@
 <section>
 	<h2 id="formatting">Formatting values</h2>
 	<p>
-		<code>RollingNumber</code> does not format numbers itself. It animates whatever string it receives,
+		<code>GlyphRoll</code> does not format numbers itself. It animates whatever string it receives,
 		so format with <code>Intl.NumberFormat</code>, <code>toFixed</code> or anything else before
 		passing the value in. Passing a number is the same as passing <code>String(value)</code>.
 	</p>

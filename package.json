@@ -1,16 +1,16 @@
 {
-	"name": "svelte-rolling-number",
+	"name": "svelte-glyph-roll",
 	"version": "0.5.0",
 	"description": "Rolling number and text animation for Svelte 5, like SwiftUI's numericText content transition. Per-glyph, spring-animated, inherits your CSS typography.",
 	"license": "MIT",
 	"author": "Finn Voigtländer",
-	"homepage": "https://finn-vgtl.github.io/svelte-rolling-number/",
+	"homepage": "https://finn-vgtl.github.io/svelte-glyph-roll/",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/finn-vgtl/svelte-rolling-number.git"
+		"url": "git+https://github.com/finn-vgtl/svelte-glyph-roll.git"
 	},
 	"bugs": {
-		"url": "https://github.com/finn-vgtl/svelte-rolling-number/issues"
+		"url": "https://github.com/finn-vgtl/svelte-glyph-roll/issues"
 	},
 	"scripts": {
 		"dev": "vite dev",

@@ -1,4 +1,4 @@
-const PACKAGE = "svelte-rolling-number";
+const PACKAGE = "svelte-glyph-roll";
 
 const INSTALL_COMMANDS = {
 	npm: `npm install ${PACKAGE}`,
@@ -10,28 +10,28 @@ const INSTALL_COMMANDS = {
 type PackageManager = keyof typeof INSTALL_COMMANDS;
 
 const QUICK_START = `<script lang="ts">
-	import { RollingNumber } from "svelte-rolling-number";
+	import { GlyphRoll } from "svelte-glyph-roll";
 
 	let count = $state(0);
 </script>
 
-<RollingNumber value={count} style="font-size: 48px" monospacedDigits />
+<GlyphRoll value={count} style="font-size: 48px" monospacedDigits />
 
 <button onclick={() => count++}>Increment</button>`;
 
 const COUNTER_EXAMPLE = `<script lang="ts">
-	import { RollingNumber } from "svelte-rolling-number";
+	import { GlyphRoll } from "svelte-glyph-roll";
 
 	let count = $state(1234);
 </script>
 
-<RollingNumber value={count} style="font-size: 56px; font-weight: 600" monospacedDigits />
+<GlyphRoll value={count} style="font-size: 56px; font-weight: 600" monospacedDigits />
 
 <button onclick={() => (count -= 1)}>−</button>
 <button onclick={() => (count += 1)}>+</button>`;
 
 const PRICE_EXAMPLE = `<script lang="ts">
-	import { RollingNumber } from "svelte-rolling-number";
+	import { GlyphRoll } from "svelte-glyph-roll";
 
 	// Shared by the glyphs and the colour, so both settle together.
 	const duration = 420;
@@ -53,7 +53,7 @@ const PRICE_EXAMPLE = `<script lang="ts">
 	});
 </script>
 
-<RollingNumber
+<GlyphRoll
 	value={formatter.format(price)}
 	{duration}
 	style="font-size: 40px; font-weight: 600; color: {price >= previous ? '#16a34a' : '#dc2626'}; transition: color {duration}ms"
@@ -61,7 +61,7 @@ const PRICE_EXAMPLE = `<script lang="ts">
 />`;
 
 const CLOCK_EXAMPLE = `<script lang="ts">
-	import { RollingNumber } from "svelte-rolling-number";
+	import { GlyphRoll } from "svelte-glyph-roll";
 
 	const format = (date: Date) =>
 		date.toLocaleTimeString("en-GB", { hour12: false });
@@ -75,10 +75,10 @@ const CLOCK_EXAMPLE = `<script lang="ts">
 </script>
 
 <!-- A clock is not a number, so pin the direction. -->
-<RollingNumber value={time} direction="up" style="font-size: 40px" monospacedDigits />`;
+<GlyphRoll value={time} direction="up" style="font-size: 40px" monospacedDigits />`;
 
 const COUNTDOWN_EXAMPLE = `<script lang="ts">
-	import { RollingNumber } from "svelte-rolling-number";
+	import { GlyphRoll } from "svelte-glyph-roll";
 
 	let seconds = $state(10);
 
@@ -90,7 +90,7 @@ const COUNTDOWN_EXAMPLE = `<script lang="ts">
 	});
 </script>
 
-<RollingNumber
+<GlyphRoll
 	value={seconds}
 	direction="down"
 	bounce={0}
@@ -101,7 +101,7 @@ const COUNTDOWN_EXAMPLE = `<script lang="ts">
 />`;
 
 const STATUS_EXAMPLE = `<script lang="ts">
-	import { RollingNumber } from "svelte-rolling-number";
+	import { GlyphRoll } from "svelte-glyph-roll";
 
 	const steps = ["Save", "Saving…", "Saved"];
 
@@ -116,10 +116,10 @@ const STATUS_EXAMPLE = `<script lang="ts">
 </script>
 
 <!-- Text has no numeric order, so pin the direction. -->
-<RollingNumber value={steps[index]} direction="up" style="font-size: 40px; font-weight: 600" />`;
+<GlyphRoll value={steps[index]} direction="up" style="font-size: 40px; font-weight: 600" />`;
 
 const WEATHER_EXAMPLE = `<script lang="ts">
-	import { RollingNumber } from "svelte-rolling-number";
+	import { GlyphRoll } from "svelte-glyph-roll";
 
 	const forecast = ["☀️ Sunny", "⛅ Cloudy", "🌧️ Rainy", "❄️ Snowy"];
 
@@ -134,13 +134,13 @@ const WEATHER_EXAMPLE = `<script lang="ts">
 </script>
 
 <!-- Each emoji is one glyph, even when it is several code points. -->
-<RollingNumber value={forecast[index]} direction="up" style="font-size: 40px; font-weight: 600" />`;
+<GlyphRoll value={forecast[index]} direction="up" style="font-size: 40px; font-weight: 600" />`;
 
 const TEXT_EXAMPLE = `<!-- Both labels start with "Sav", so only the ending rolls. -->
-<RollingNumber value={saving ? "Saving…" : "Saved"} direction="up" />`;
+<GlyphRoll value={saving ? "Saving…" : "Saved"} direction="up" />`;
 
 const INLINE_EXAMPLE = `<script lang="ts">
-	import { RollingNumber } from "svelte-rolling-number";
+	import { GlyphRoll } from "svelte-glyph-roll";
 
 	let readers = $state(97);
 
@@ -155,11 +155,11 @@ const INLINE_EXAMPLE = `<script lang="ts">
 
 <!-- Inherits the paragraph's font and sits on its baseline. -->
 <p>
-	Right now, <RollingNumber value={readers} style="font-weight: 600" /> people are reading this page,
+	Right now, <GlyphRoll value={readers} style="font-weight: 600" /> people are reading this page,
 	and the sentence makes room as the count grows.
 </p>`;
 
-const TUNING_EXAMPLE = `<RollingNumber
+const TUNING_EXAMPLE = `<GlyphRoll
 	value={value}
 	duration={700}
 	bounce={0.7}
@@ -170,7 +170,7 @@ const TUNING_EXAMPLE = `<RollingNumber
 />`;
 
 const TYPOGRAPHY_EXAMPLE = `<p class="distance">
-	<RollingNumber value="42,195 km" />
+	<GlyphRoll value="42,195 km" />
 </p>
 
 <style>
@@ -191,9 +191,9 @@ const FORMATTING_EXAMPLE = `<script lang="ts">
 </script>
 
 <!-- "1.299,50 €": align around the comma, not the dot. -->
-<RollingNumber value={euro.format(amount)} decimalSeparator="," monospacedDigits />`;
+<GlyphRoll value={euro.format(amount)} decimalSeparator="," monospacedDigits />`;
 
-const ATTRIBUTES_EXAMPLE = `<RollingNumber
+const ATTRIBUTES_EXAMPLE = `<GlyphRoll
 	value={score}
 	class="score"
 	style="vertical-align: middle"
@@ -201,7 +201,7 @@ const ATTRIBUTES_EXAMPLE = `<RollingNumber
 />`;
 
 const STATIC_EXAMPLE = `<!-- Only animate after the user interacts. -->
-<RollingNumber value={total} animated={hasInteracted} />`;
+<GlyphRoll value={total} animated={hasInteracted} />`;
 
 export type { PackageManager };
 export {

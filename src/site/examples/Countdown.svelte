@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RollingNumber } from "#lib";
+	import { GlyphRoll } from "#lib";
 
 	let seconds = $state(10);
 
@@ -11,7 +11,7 @@
 	});
 </script>
 
-<RollingNumber
+<GlyphRoll
 	value={seconds}
 	direction="down"
 	bounce={0}
