@@ -1,8 +1,8 @@
-export { default as RollingNumber } from "./RollingNumber.svelte";
+export { default as GlyphRoll } from "./GlyphRoll.svelte";
 
 export type {
-	RollingNumberAlignment,
-	RollingNumberDirection,
-	RollingNumberProps,
-	RollingNumberTransitionProps,
+	GlyphRollAlignment,
+	GlyphRollDirection,
+	GlyphRollProps,
+	GlyphRollTransitionProps,
 } from "./types";

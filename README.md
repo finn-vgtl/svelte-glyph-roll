@@ -1,19 +1,19 @@
-# svelte-rolling-number
+# svelte-glyph-roll
 
 Rolling number and text animation for Svelte 5, like SwiftUI's `.contentTransition(.numericText())`.
 
-`RollingNumber` renders a line of text and, whenever its value changes, animates each glyph that changed: departing glyphs roll out, scale down, blur and fade; arriving glyphs do the reverse. Unchanged glyphs slide into their new positions.
+`GlyphRoll` renders a line of text and, whenever its value changes, animates each glyph that changed: departing glyphs roll out, scale down, blur and fade; arriving glyphs do the reverse. Unchanged glyphs slide into their new positions.
 
 The effect is inspired by SwiftUI's [`ContentTransition.numericText(value:)`](<https://developer.apple.com/documentation/swiftui/contenttransition/numerictext(value:)>), brought to the web. The implementation is based on the web renderer from [expo-content-transition](https://github.com/rit3zh/expo-content-transition), with a Svelte-native API.
 
-**[Documentation and live examples →](https://finn-vgtl.github.io/svelte-rolling-number)**
+**[Documentation and live examples →](https://finn-vgtl.github.io/svelte-glyph-roll)**
 
 ## Installation
 
-Install the [package from npm](https://www.npmjs.com/package/svelte-rolling-number):
+Install the [package from npm](https://www.npmjs.com/package/svelte-glyph-roll):
 
 ```sh
-npm install svelte-rolling-number
+npm install svelte-glyph-roll
 ```
 
 Requires Svelte `^5.7.0`.
@@ -22,12 +22,12 @@ Requires Svelte `^5.7.0`.
 
 ```svelte
 <script lang="ts">
-	import { RollingNumber } from "svelte-rolling-number";
+	import { GlyphRoll } from "svelte-glyph-roll";
 
 	let count = $state(0);
 </script>
 
-<RollingNumber value={count} style="font-size: 48px" monospacedDigits />
+<GlyphRoll value={count} style="font-size: 48px" monospacedDigits />
 
 <button onclick={() => count++}>Increment</button>
 ```
@@ -59,9 +59,9 @@ The first value renders without animation; every later change to `value` trigger
 | `clip`             | `boolean`                      | `true`    | Clips glyphs to the line box with a feathered edge so they don't overlap nearby content. |
 | `animated`         | `boolean`                      | `true`    | Set to `false` to apply values instantly.                                                |
 
-All other attributes (`class`, `style`, `id`, `data-*`, event handlers) are forwarded to the host `<span>`. Prop types are exported as `RollingNumberProps`, `RollingNumberTransitionProps`, `RollingNumberAlignment` and `RollingNumberDirection`.
+All other attributes (`class`, `style`, `id`, `data-*`, event handlers) are forwarded to the host `<span>`. Prop types are exported as `GlyphRollProps`, `GlyphRollTransitionProps`, `GlyphRollAlignment` and `GlyphRollDirection`.
 
-See the [documentation](https://finn-vgtl.github.io/svelte-rolling-number/docs) for guides and examples.
+See the [documentation](https://finn-vgtl.github.io/svelte-glyph-roll/docs) for guides and examples.
 
 ## Development
 
@@ -80,4 +80,4 @@ See [CHANGELOG.md](CHANGELOG.md) for what changed in each release, including mig
 
 ## License
 
-MIT. Includes code adapted from expo-content-transition. Its docs on the transition behavior largely apply here, but the component API differs, so use `RollingNumberProps` for props and usage. See [LICENSE](LICENSE).
+MIT. Includes code adapted from expo-content-transition. Its docs on the transition behavior largely apply here, but the component API differs, so use `GlyphRollProps` for props and usage. See [LICENSE](LICENSE).

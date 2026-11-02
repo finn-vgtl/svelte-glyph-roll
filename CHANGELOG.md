@@ -1,12 +1,16 @@
 # Changelog
 
-All notable changes to `svelte-rolling-number` are documented here. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). While the major version is `0`, a breaking change bumps the minor version.
+All notable changes to `svelte-glyph-roll` are documented here. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the project follows [Semantic Versioning](https://semver.org/spec/v2.0.0.html). While the major version is `0`, a breaking change bumps the minor version.
 
 ## [Unreleased]
 
+### Breaking changes
+
+- The package is renamed from `svelte-rolling-number` to `svelte-glyph-roll`, and its component from `RollingNumber` to `GlyphRoll`. The exported types are renamed to match: `GlyphRollProps`, `GlyphRollTransitionProps`, `GlyphRollAlignment` and `GlyphRollDirection`. Behaviour and props are unchanged. Run `npm uninstall svelte-rolling-number && npm install svelte-glyph-roll`, then replace `import { RollingNumber } from "svelte-rolling-number"` with `import { GlyphRoll } from "svelte-glyph-roll"` and rename `<RollingNumber>` to `<GlyphRoll>` and any `RollingNumber*` type imports to `GlyphRoll*`.
+
 ### Added
 
-- Hovering `RollingNumber` in your editor now shows a short description of the component, a usage example and a link to the documentation.
+- Hovering `GlyphRoll` in your editor now shows a short description of the component, a usage example and a link to the documentation.
 
 ## [0.5.0] - 2026-11-01
 
@@ -67,11 +71,11 @@ All notable changes to `svelte-rolling-number` are documented here. The format i
 
 - `NumericText`, a Svelte 5 port of the web renderer from [expo-content-transition](https://github.com/rit3zh/expo-content-transition): per-glyph, spring-animated transitions for changing numbers and text.
 
-[Unreleased]: https://github.com/finn-vgtl/svelte-rolling-number/compare/v0.5.0...HEAD
-[0.5.0]: https://github.com/finn-vgtl/svelte-rolling-number/compare/v0.4.1...v0.5.0
-[0.4.1]: https://github.com/finn-vgtl/svelte-rolling-number/compare/v0.4.0...v0.4.1
-[0.4.0]: https://github.com/finn-vgtl/svelte-rolling-number/compare/v0.3.0...v0.4.0
-[0.3.0]: https://github.com/finn-vgtl/svelte-rolling-number/compare/v0.2.1...v0.3.0
-[0.2.1]: https://github.com/finn-vgtl/svelte-rolling-number/compare/v0.2.0...v0.2.1
-[0.2.0]: https://github.com/finn-vgtl/svelte-rolling-number/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/finn-vgtl/svelte-rolling-number/releases/tag/v0.1.0
+[Unreleased]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.4.1...v0.5.0
+[0.4.1]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.4.0...v0.4.1
+[0.4.0]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.3.0...v0.4.0
+[0.3.0]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.2.1...v0.3.0
+[0.2.1]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.2.0...v0.2.1
+[0.2.0]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/finn-vgtl/svelte-glyph-roll/releases/tag/v0.1.0

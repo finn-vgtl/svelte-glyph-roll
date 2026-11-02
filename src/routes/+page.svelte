@@ -94,7 +94,7 @@
 			title: "Inline in a sentence",
 			file: "Inline.svelte",
 			description:
-				"RollingNumber renders inline, inherits the surrounding font and sits on the text baseline. When the value gains a digit, the width animates and the rest of the line follows.",
+				"GlyphRoll renders inline, inherits the surrounding font and sits on the text baseline. When the value gains a digit, the width animates and the rest of the line follows.",
 			demo: Inline,
 			code: INLINE_EXAMPLE,
 		},
@@ -118,7 +118,7 @@
 	};
 </script>
 
-<Seo title="svelte-rolling-number · Animated number transitions for Svelte 5" {description} path="/" />
+<Seo title="svelte-glyph-roll · Animated number transitions for Svelte 5" {description} path="/" />
 
 <svelte:head>
 	<!-- Escape "<" so a value can never close the script element early. -->
@@ -131,7 +131,7 @@
 			<p class="eyebrow">Svelte 5 component</p>
 			<h1>Numbers that roll, not jump.</h1>
 			<p class="lead">
-				<code>RollingNumber</code> animates every changed glyph of a number or a string with
+				<code>GlyphRoll</code> animates every changed glyph of a number or a string with
 				springs, blur and clipping. Drop it in wherever a value changes: prices, counters, clocks,
 				scores, status labels.
 			</p>
@@ -166,7 +166,7 @@
 		<div>
 			<h2 id="usage-title">Usage</h2>
 			<p>
-				Import <code>RollingNumber</code> and pass it a <code>value</code>. Strings and numbers both
+				Import <code>GlyphRoll</code> and pass it a <code>value</code>. Strings and numbers both
 				work. Whenever the value changes, the component diffs the old and new text per glyph and
 				animates only what changed.
 			</p>
@@ -175,7 +175,7 @@
 					Install the <ExternalLink href={NPM_URL}>package from npm</ExternalLink>. It needs Svelte
 					<code>^5.7.0</code>.
 				</li>
-				<li>Render <code>&lt;RollingNumber value=&#123;…&#125; /&gt;</code>.</li>
+				<li>Render <code>&lt;GlyphRoll value=&#123;…&#125; /&gt;</code>.</li>
 				<li>
 					Style it with plain CSS, which it inherits like any text, and tune the motion with
 					props such as <code>duration</code> and <code>bounce</code>.

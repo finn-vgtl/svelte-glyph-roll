@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { RollingNumber, type RollingNumberDirection } from "#lib";
+	import { GlyphRoll, type GlyphRollDirection } from "#lib";
 
 	import CodeBlock from "./CodeBlock.svelte";
 
 	// The library's own defaults, so the generated code only lists what was changed.
 	const DEFAULTS = {
-		direction: "auto" as RollingNumberDirection,
+		direction: "auto" as GlyphRollDirection,
 		duration: 420,
 		bounce: 0.46,
 		enterScale: 0.4,
@@ -31,7 +31,7 @@
 	// On by default here, since the demo values are numbers; the library leaves it off.
 	let monospacedDigits = $state(true);
 
-	const directions: RollingNumberDirection[] = ["auto", "up", "down"];
+	const directions: GlyphRollDirection[] = ["auto", "up", "down"];
 
 	// The value is free text. Stepping only works while it reads as an en-US number.
 	const numeric = $derived.by(() => {
@@ -78,7 +78,7 @@
 
 	const code = $derived(
 		[
-			"<RollingNumber",
+			"<GlyphRoll",
 			`\tvalue=${JSON.stringify(value)}`,
 			direction !== DEFAULTS.direction && `\tdirection="${direction}"`,
 			duration !== DEFAULTS.duration && `\tduration={${duration}}`,
@@ -98,7 +98,7 @@
 
 <div class="playground">
 	<div class="stage">
-		<RollingNumber
+		<GlyphRoll
 			{value}
 			{direction}
 			{duration}
@@ -138,23 +138,23 @@
 		</fieldset>
 
 		<label class="range">
-			<span>duration <output><RollingNumber value="{duration}ms" /></output></span>
+			<span>duration <output><GlyphRoll value="{duration}ms" /></output></span>
 			<input type="range" min="100" max="1500" step="10" bind:value={duration} />
 		</label>
 		<label class="range">
-			<span>bounce <output><RollingNumber value={bounce.toFixed(2)} /></output></span>
+			<span>bounce <output><GlyphRoll value={bounce.toFixed(2)} /></output></span>
 			<input type="range" min="0" max="0.95" step="0.01" bind:value={bounce} />
 		</label>
 		<label class="range">
-			<span>enterScale <output><RollingNumber value={enterScale.toFixed(2)} /></output></span>
+			<span>enterScale <output><GlyphRoll value={enterScale.toFixed(2)} /></output></span>
 			<input type="range" min="0" max="2" step="0.05" bind:value={enterScale} />
 		</label>
 		<label class="range">
-			<span>travel <output><RollingNumber value={travel.toFixed(2)} /></output></span>
+			<span>travel <output><GlyphRoll value={travel.toFixed(2)} /></output></span>
 			<input type="range" min="0" max="3" step="0.01" bind:value={travel} />
 		</label>
 		<label class="range">
-			<span>blurIntensity <output><RollingNumber value={blurIntensity.toFixed(1)} /></output></span>
+			<span>blurIntensity <output><GlyphRoll value={blurIntensity.toFixed(1)} /></output></span>
 			<input type="range" min="0" max="8" step="0.1" bind:value={blurIntensity} />
 		</label>
 		<div class="checkboxes">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RollingNumber } from "#lib";
+	import { GlyphRoll } from "#lib";
 
 	const steps = ["Save", "Saving…", "Saved"];
 
@@ -13,4 +13,4 @@
 	});
 </script>
 
-<RollingNumber value={steps[index]} direction="up" style="font-size: 40px; font-weight: 600" />
+<GlyphRoll value={steps[index]} direction="up" style="font-size: 40px; font-weight: 600" />

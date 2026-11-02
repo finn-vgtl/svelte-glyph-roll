@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RollingNumber } from "#lib";
+	import { GlyphRoll } from "#lib";
 
 	const forecast = ["☀️ Sunny", "⛅ Cloudy", "🌧️ Rainy", "❄️ Snowy"];
 
@@ -13,4 +13,4 @@
 	});
 </script>
 
-<RollingNumber value={forecast[index]} direction="up" style="font-size: 40px; font-weight: 600" />
+<GlyphRoll value={forecast[index]} direction="up" style="font-size: 40px; font-weight: 600" />

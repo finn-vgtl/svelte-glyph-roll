@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RollingNumber } from "#lib";
+	import { GlyphRoll } from "#lib";
 
 	const format = (date: Date) =>
 		date.toLocaleTimeString("en-GB", { hour12: false });
@@ -12,4 +12,4 @@
 	});
 </script>
 
-<RollingNumber value={time} direction="up" style="font-size: 40px" monospacedDigits />
+<GlyphRoll value={time} direction="up" style="font-size: 40px" monospacedDigits />

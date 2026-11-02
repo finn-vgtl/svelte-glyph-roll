@@ -1,13 +1,13 @@
 import { TransitionSprings } from "../animation/TransitionSprings";
-import { RollingNumberAlignment, TransitionDirection } from "../enums";
+import { GlyphRollAlignment, TransitionDirection } from "../enums";
 import {
 	TRANSITION_SHAPE_DEFAULTS,
 	type TransitionShape,
 } from "./TransitionShape";
 
-interface RollingNumberSpec {
+interface GlyphRollSpec {
 	text: string;
-	alignment: RollingNumberAlignment;
+	alignment: GlyphRollAlignment;
 	direction: TransitionDirection;
 	decimalSeparator: string;
 	shape: TransitionShape;
@@ -17,9 +17,9 @@ interface RollingNumberSpec {
 	bounce: number;
 }
 
-const createRollingNumberSpec = (): RollingNumberSpec => ({
+const createGlyphRollSpec = (): GlyphRollSpec => ({
 	text: "",
-	alignment: RollingNumberAlignment.Leading,
+	alignment: GlyphRollAlignment.Leading,
 	direction: TransitionDirection.Auto,
 	decimalSeparator: ".",
 	shape: { ...TRANSITION_SHAPE_DEFAULTS },
@@ -29,10 +29,10 @@ const createRollingNumberSpec = (): RollingNumberSpec => ({
 	bounce: TransitionSprings.DEFAULT_BOUNCE,
 });
 
-const isBlurActive = (spec: RollingNumberSpec): boolean =>
+const isBlurActive = (spec: GlyphRollSpec): boolean =>
 	spec.shape.blurIntensity > 0;
 
-const specsEqual = (lhs: RollingNumberSpec, rhs: RollingNumberSpec): boolean =>
+const specsEqual = (lhs: GlyphRollSpec, rhs: GlyphRollSpec): boolean =>
 	lhs.text === rhs.text &&
 	lhs.alignment === rhs.alignment &&
 	lhs.direction === rhs.direction &&
@@ -46,5 +46,5 @@ const specsEqual = (lhs: RollingNumberSpec, rhs: RollingNumberSpec): boolean =>
 	lhs.shape.enterScale === rhs.shape.enterScale &&
 	lhs.shape.travelRatio === rhs.shape.travelRatio;
 
-export type { RollingNumberSpec };
-export { createRollingNumberSpec, isBlurActive, specsEqual };
+export type { GlyphRollSpec };
+export { createGlyphRollSpec, isBlurActive, specsEqual };

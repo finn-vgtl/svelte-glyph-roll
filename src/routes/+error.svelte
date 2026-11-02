@@ -6,7 +6,7 @@
 </script>
 
 <svelte:head>
-	<title>{notFound ? "Page not found" : "Error"} · svelte-rolling-number</title>
+	<title>{notFound ? "Page not found" : "Error"} · svelte-glyph-roll</title>
 	<meta name="robots" content="noindex" />
 </svelte:head>
 
