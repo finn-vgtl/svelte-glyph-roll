@@ -4,6 +4,8 @@ All notable changes to `svelte-glyph-roll` are documented here. The format is ba
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-03
+
 ### Breaking changes
 
 - The package is renamed from `svelte-rolling-number` to `svelte-glyph-roll`, and its component from `RollingNumber` to `GlyphRoll`. The exported types are renamed to match: `GlyphRollProps`, `GlyphRollTransitionProps`, `GlyphRollAlignment` and `GlyphRollDirection`. Behaviour and props are unchanged. Run `npm uninstall svelte-rolling-number && npm install svelte-glyph-roll`, then replace `import { RollingNumber } from "svelte-rolling-number"` with `import { GlyphRoll } from "svelte-glyph-roll"` and rename `<RollingNumber>` to `<GlyphRoll>` and any `RollingNumber*` type imports to `GlyphRoll*`.
@@ -71,7 +73,8 @@ All notable changes to `svelte-glyph-roll` are documented here. The format is ba
 
 - `NumericText`, a Svelte 5 port of the web renderer from [expo-content-transition](https://github.com/rit3zh/expo-content-transition): per-glyph, spring-animated transitions for changing numbers and text.
 
-[Unreleased]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.4.0...v0.4.1
 [0.4.0]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.3.0...v0.4.0
