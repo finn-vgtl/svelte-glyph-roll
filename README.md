@@ -6,7 +6,7 @@ Rolling number and text animation for Svelte 5, like SwiftUI's `.contentTransiti
 
 The effect is inspired by SwiftUI's [`ContentTransition.numericText(value:)`](<https://developer.apple.com/documentation/swiftui/contenttransition/numerictext(value:)>), brought to the web. The implementation is based on the web renderer from [expo-content-transition](https://github.com/rit3zh/expo-content-transition), with a Svelte-native API.
 
-**[Documentation and live examples →](https://finn-vgtl.github.io/svelte-glyph-roll)**
+**[Documentation and live examples →](https://glyph-roll.finn-vgtl.dev)**
 
 ## Installation
 
@@ -61,7 +61,7 @@ The first value renders without animation; every later change to `value` trigger
 
 All other attributes (`class`, `style`, `id`, `data-*`, event handlers) are forwarded to the host `<span>`. Prop types are exported as `GlyphRollProps`, `GlyphRollTransitionProps`, `GlyphRollAlignment` and `GlyphRollDirection`.
 
-See the [documentation](https://finn-vgtl.github.io/svelte-glyph-roll/docs) for guides and examples.
+See the [documentation](https://glyph-roll.finn-vgtl.dev/docs) for guides and examples.
 
 ## Development
 
