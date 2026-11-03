@@ -2,7 +2,7 @@ const SITE_NAME = "svelte-glyph-roll";
 
 // Absolute URL of the deployed site, without a trailing slash. Canonical links, Open Graph tags and
 // the sitemap need absolute URLs, which the prerendered pages can't derive from the request.
-const SITE_URL = "https://finn-vgtl.github.io/svelte-glyph-roll";
+const SITE_URL = "https://glyph-roll.finn-vgtl.dev";
 
 const REPOSITORY_URL = "https://github.com/finn-vgtl/svelte-glyph-roll";
 const NPM_URL = "https://www.npmjs.com/package/svelte-glyph-roll";

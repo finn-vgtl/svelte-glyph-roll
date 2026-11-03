@@ -12,7 +12,7 @@ surrounding CSS.
 <GlyphRoll value={count} style="font-size: 48px" monospacedDigits />
 ```
 
-@see https://finn-vgtl.github.io/svelte-glyph-roll
+@see https://glyph-roll.finn-vgtl.dev
 -->
 
 <script lang="ts">
