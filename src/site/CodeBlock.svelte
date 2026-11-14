@@ -1,16 +1,22 @@
 <script lang="ts">
 	import CopyButton from "./CopyButton.svelte";
+	import { highlighter } from "./highlight";
 
 	let {
 		code,
 		title,
+		lang = "svelte",
 		maxHeight,
 	}: {
 		code: string;
 		title?: string;
+		/** Language to highlight the code as. */
+		lang?: "css" | "html" | "js" | "svelte" | "ts";
 		/** Caps the height of the code; longer code scrolls. Any CSS length. */
 		maxHeight?: string;
 	} = $props();
+
+	const tokens = $derived(highlighter.tokenize(code, { lang }).tokens);
 </script>
 
 <figure class="code-block">
@@ -20,7 +26,11 @@
 	</figcaption>
 	<!-- Focusable when its height is capped, so keyboard users can scroll it too. -->
 	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
-	<pre style:max-height={maxHeight} tabindex={maxHeight ? 0 : undefined}><code>{code}</code></pre>
+	<pre style:max-height={maxHeight} tabindex={maxHeight ? 0 : undefined}><code
+		>{#each tokens as token, index (index)}{#if token.className}<span class="th-{token.className}"
+					>{token.value}</span
+				>{:else}{token.value}{/if}{/each}</code
+	></pre>
 </figure>
 
 <style>
@@ -29,6 +39,7 @@
 		border: 1px solid var(--border);
 		border-radius: var(--radius);
 		background: var(--code-bg);
+		color: var(--th-token);
 		overflow: hidden;
 		min-width: 0;
 	}

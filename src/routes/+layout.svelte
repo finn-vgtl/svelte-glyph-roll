@@ -6,6 +6,7 @@
 	import { page } from "$app/state";
 
 	import ExternalLink from "../site/ExternalLink.svelte";
+	import { syntaxThemeCss } from "../site/highlight";
 	import { NPM_URL, REPOSITORY_URL } from "../site/site";
 
 	let { children } = $props();
@@ -21,6 +22,10 @@
 		return () => root.style.removeProperty("scroll-behavior");
 	});
 </script>
+
+<svelte:head>
+	{@html `<style>${syntaxThemeCss}</style>`}
+</svelte:head>
 
 <a class="skip-link" href="#content">Skip to content</a>
 
