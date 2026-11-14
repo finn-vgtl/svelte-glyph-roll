@@ -362,7 +362,7 @@
 <section>
 	<h2 id="types">Types</h2>
 	<p>All prop types are exported for use in wrapper components:</p>
-	<CodeBlock code={TYPES_EXAMPLE} title="types.ts" />
+	<CodeBlock code={TYPES_EXAMPLE} title="types.ts" lang="ts" />
 </section>
 
 <style>
