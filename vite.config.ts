@@ -12,8 +12,9 @@ export default defineConfig({
 					filename.split(/[/\\]/).includes("node_modules") ? undefined : true,
 			},
 
-			// Deployed to GitHub Pages as a static site. The workflow sets BASE_PATH to the repository
-			// path (e.g. /svelte-glyph-roll); locally the site is served from the root.
+			// Deployed to GitHub Pages as a static site. The workflow sets BASE_PATH to the Pages base
+			// path: empty on the custom domain, the repository path (e.g. /svelte-glyph-roll) without one.
+			// Locally the site is served from the root.
 			adapter: adapter({ fallback: "404.html" }),
 			paths: {
 				base: (process.env.BASE_PATH ?? "") as "" | `/${string}`,
