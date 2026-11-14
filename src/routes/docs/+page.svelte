@@ -64,6 +64,13 @@
 				"Nominal transition duration in milliseconds. Scales every internal spring, so the character of the motion is preserved.",
 		},
 		{
+			name: "delay",
+			type: "number",
+			default: "0",
+			description:
+				"Milliseconds a new value waits before it starts animating; other props apply at once. Stagger components that change together with increasing delays. Clamped to `0`–`1000`.",
+		},
+		{
 			name: "bounce",
 			type: "number",
 			default: "0.46",
@@ -251,6 +258,11 @@
 	<p>These props shape the transition. They combine freely:</p>
 	<ul>
 		<li><code>duration</code> scales every spring, keeping the feel of the motion intact.</li>
+		<li>
+			<code>delay</code> holds a new value back before it animates. Give components that change
+			together increasing delays, such as <code>delay={"{column * 40}"}</code> on the totals in a
+			table footer, to stagger them. Keep the whole spread short.
+		</li>
 		<li><code>bounce</code> controls overshoot of the roll. Opacity and position never bounce.</li>
 		<li><code>travel</code> sets how far glyphs roll, relative to the line height.</li>
 		<li><code>enterScale</code> sets the size glyphs arrive at and leave with.</li>

@@ -51,6 +51,7 @@ The first value renders without animation; every later change to `value` trigger
 | `monospacedDigits` | `boolean`                      | `false`   | Adds `font-variant-numeric: tabular-nums` so unchanged digits don't shift sideways.      |
 | `direction`        | `"auto" \| "up" \| "down"`     | `"auto"`  | Which way glyphs travel.                                                                 |
 | `duration`         | `number`                       | `420`     | Nominal transition duration in milliseconds. Scales every internal spring.               |
+| `delay`            | `number`                       | `0`       | Milliseconds a new value waits before it animates, `0`–`1000`. Staggers components.      |
 | `bounce`           | `number`                       | `0.46`    | Overshoot of the vertical roll, `0`–`0.95`.                                              |
 | `enterScale`       | `number`                       | `0.4`     | Size glyphs arrive at and leave with, `0`–`2`. `1` disables scaling.                     |
 | `travel`           | `number`                       | `0.333`   | How far glyphs roll, as a fraction of the line height, `0`–`3`.                          |

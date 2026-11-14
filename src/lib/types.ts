@@ -22,6 +22,19 @@ interface GlyphRollTransitionProps {
 	 */
 	duration?: number;
 	/**
+	 * How long a new `value` waits before it starts animating, in milliseconds. Stagger several
+	 * components that change together, such as the totals in a table footer, by giving each a
+	 * larger delay: `delay={column * 40}`. Keep the whole spread short, since a delayed value is
+	 * feedback that arrives late.
+	 *
+	 * A value that changes again while waiting replaces the waiting one without restarting the
+	 * delay. Changes to other props, such as `alignment`, and changes that are not animated apply at
+	 * once. Screen readers get the new value straight away. Clamped to `0`–`1000`.
+	 *
+	 * @default 0
+	 */
+	delay?: number;
+	/**
 	 * How far the vertical roll overshoots before settling, from `0` to `0.95`. `0` arrives dead
 	 * straight. Only the roll bounces — a wobbling opacity or position would just look broken.
 	 *

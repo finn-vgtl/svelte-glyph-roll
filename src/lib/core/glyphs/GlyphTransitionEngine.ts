@@ -41,8 +41,45 @@ class GlyphTransitionEngine {
 	private countsDown = false;
 	private nextId = 0;
 	private lastTypesetter: GlyphTypesetter | null = null;
+	/** A change waiting out its delay, applied by `tick` once `pendingDelay` runs out. */
+	private pending: { spec: GlyphRollSpec; typesetter: GlyphTypesetter } | null =
+		null;
+	private pendingDelay = 0;
 
-	apply(spec: GlyphRollSpec, typesetter: GlyphTypesetter): void {
+	/**
+	 * Shows `spec`. With a `delay` in seconds, an animated change to the text waits that long before
+	 * it starts. A new text that arrives while another is waiting replaces it but keeps its deadline,
+	 * so a value that changes faster than the delay still animates. Everything else applies at once:
+	 * changes that would not animate, and changes to other fields, which a waiting text picks up.
+	 */
+	apply(spec: GlyphRollSpec, typesetter: GlyphTypesetter, delay = 0): void {
+		const typographyChanged =
+			this.lastTypesetter !== null && !this.lastTypesetter.equals(typesetter);
+		const canWait =
+			delay > 0 &&
+			spec.animationsEnabled &&
+			this.hasContent &&
+			!typographyChanged;
+		const waitingText = this.pending?.spec.text;
+
+		if (canWait && spec.text !== this.currentText) {
+			if (spec.text !== waitingText) {
+				if (!this.pending) this.pendingDelay = delay;
+				this.pending = { spec, typesetter };
+				return;
+			}
+
+			// Only other fields changed while a text waits: show them on the current text now.
+			this.pending = { spec, typesetter };
+			this.commit({ ...spec, text: this.currentText }, typesetter);
+			return;
+		}
+
+		this.pending = null;
+		this.commit(spec, typesetter);
+	}
+
+	private commit(spec: GlyphRollSpec, typesetter: GlyphTypesetter): void {
 		const typographyChanged =
 			this.lastTypesetter !== null && !this.lastTypesetter.equals(typesetter);
 		this.lastTypesetter = typesetter;
@@ -98,8 +135,21 @@ class GlyphTransitionEngine {
 		return !this.layoutWidth.isSettled;
 	}
 
+	/** Whether a change is waiting out its delay. */
+	get isWaiting(): boolean {
+		return this.pending !== null;
+	}
+
 	tick(deltaTime: number): boolean {
-		let running = this.layoutWidth.tick(deltaTime);
+		if (this.pending) {
+			this.pendingDelay -= deltaTime;
+			if (this.pendingDelay <= 0) {
+				const { spec, typesetter } = this.pending;
+				this.apply(spec, typesetter);
+			}
+		}
+
+		let running = this.layoutWidth.tick(deltaTime) || this.isWaiting;
 		let index = 0;
 
 		while (index < this.glyphs.length) {

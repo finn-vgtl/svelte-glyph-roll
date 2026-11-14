@@ -140,6 +140,21 @@ describe("GlyphRoll", () => {
 			expect(isSettled(host)).toBe(true);
 		});
 
+		it("holds a change back for the delay", async () => {
+			const { host, rerender } = await mount({ value: 100, delay: 300 });
+			await rerender({ value: 101 });
+			expect(fallbackOf(host).textContent).toBe("101");
+			expect(renderedText(host)).toBe("100");
+			expect(isSettled(host)).toBe(true);
+			await waitForText(host, "101");
+		});
+
+		it("caps the delay at one second", async () => {
+			const { host, rerender } = await mount({ value: 1, delay: 60_000 });
+			await rerender({ value: 2 });
+			await waitForText(host, "2");
+		});
+
 		it("can switch animation on later", async () => {
 			const { host, rerender } = await mount({ value: 1, animated: false });
 			await rerender({ value: 2, animated: true });

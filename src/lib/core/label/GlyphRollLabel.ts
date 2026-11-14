@@ -179,11 +179,12 @@ class GlyphRollLabel {
 		}
 	}
 
-	update(spec: GlyphRollSpec): void {
+	/** Shows `spec`. An animated change waits `delay` seconds before it starts. */
+	update(spec: GlyphRollSpec, delay = 0): void {
 		const typesetter = GlyphTypesetter.inheritingFrom(this.probe);
 		if (this.typesetter?.equals(typesetter) && specsEqual(spec, this.spec))
 			return;
-		this.apply(spec, typesetter);
+		this.apply(spec, typesetter, delay);
 	}
 
 	destroy(): void {
@@ -201,11 +202,15 @@ class GlyphRollLabel {
 		if (!typesetter.equals(this.typesetter)) this.apply(this.spec, typesetter);
 	}
 
-	private apply(spec: GlyphRollSpec, typesetter: GlyphTypesetter): void {
+	private apply(
+		spec: GlyphRollSpec,
+		typesetter: GlyphTypesetter,
+		delay = 0,
+	): void {
 		this.typesetter = typesetter;
 		this.spec = spec;
 
-		this.engine.apply(spec, typesetter);
+		this.engine.apply(spec, typesetter, delay);
 		this.syncNodes();
 		this.render();
 		this.reportContentSize();
