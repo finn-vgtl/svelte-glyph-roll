@@ -1,7 +1,16 @@
 <script lang="ts">
 	import CopyButton from "./CopyButton.svelte";
 
-	let { code, title }: { code: string; title?: string } = $props();
+	let {
+		code,
+		title,
+		maxHeight,
+	}: {
+		code: string;
+		title?: string;
+		/** Caps the height of the code; longer code scrolls. Any CSS length. */
+		maxHeight?: string;
+	} = $props();
 </script>
 
 <figure class="code-block">
@@ -9,7 +18,9 @@
 		<span>{title ?? ""}</span>
 		<CopyButton text={code} label="Copy code" />
 	</figcaption>
-	<pre><code>{code}</code></pre>
+	<!-- Focusable when its height is capped, so keyboard users can scroll it too. -->
+	<!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+	<pre style:max-height={maxHeight} tabindex={maxHeight ? 0 : undefined}><code>{code}</code></pre>
 </figure>
 
 <style>
@@ -37,7 +48,7 @@
 	pre {
 		margin: 0;
 		padding: 1rem;
-		overflow-x: auto;
+		overflow: auto;
 		tab-size: 2;
 		font-size: 0.85rem;
 		line-height: 1.6;
