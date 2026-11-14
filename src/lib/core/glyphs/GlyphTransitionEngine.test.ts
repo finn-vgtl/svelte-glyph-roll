@@ -463,4 +463,112 @@ describe("GlyphTransitionEngine", () => {
 		engine.apply(spec("2", { duration: 1 }), typesetter);
 		expect(settle(engine)).toBeGreaterThan(settle(fast));
 	});
+	describe("delay", () => {
+		const FRAME = 1 / 60;
+
+		beforeEach(() => {
+			engine.apply(spec("12"), typesetter);
+		});
+
+		it("holds an animated change until the delay runs out", () => {
+			engine.apply(spec("13"), typesetter, 0.1);
+			expect(visibleText(engine)).toBe("12");
+			expect(engine.glyphs.every((glyph) => !glyph.isAnimating)).toBe(true);
+
+			for (let frame = 0; frame < 5; frame++) {
+				expect(engine.tick(FRAME)).toBe(true);
+			}
+			expect(visibleText(engine)).toBe("12");
+
+			for (let frame = 0; frame < 2; frame++) engine.tick(FRAME);
+			expect(visibleText(engine)).toBe("13");
+			expect(engine.glyphs.some((glyph) => glyph.isAnimating)).toBe(true);
+		});
+
+		it("keeps the size of the shown value while waiting", () => {
+			engine.apply(spec("1234"), typesetter, 0.1);
+			engine.tick(FRAME);
+			expect(engine.contentSize.width).toBe(2 * ADVANCE);
+			expect(engine.layoutSize.width).toBe(2 * ADVANCE);
+		});
+
+		it("replaces a waiting change without restarting the delay", () => {
+			engine.apply(spec("13"), typesetter, 0.1);
+			for (let frame = 0; frame < 4; frame++) engine.tick(FRAME);
+			engine.apply(spec("14"), typesetter, 0.1);
+
+			for (let frame = 0; frame < 3; frame++) engine.tick(FRAME);
+			expect(visibleText(engine)).toBe("14");
+			expect(byUnit(engine, "3")).toHaveLength(0);
+		});
+
+		it("settles on the delayed value", () => {
+			engine.apply(spec("13"), typesetter, 0.1);
+			settle(engine);
+			expect(engine.isWaiting).toBe(false);
+			expect(visibleText(engine)).toBe("13");
+			expect(engine.glyphs).toHaveLength(2);
+		});
+
+		it("applies a change without a delay at once, dropping the waiting one", () => {
+			engine.apply(spec("13"), typesetter, 0.1);
+			engine.apply(spec("14"), typesetter);
+			expect(engine.isWaiting).toBe(false);
+			expect(visibleText(engine)).toBe("14");
+		});
+
+		it("ignores the delay when the change is not animated", () => {
+			engine.apply(spec("13", { animationsEnabled: false }), typesetter, 0.1);
+			expect(engine.isWaiting).toBe(false);
+			expect(visibleText(engine)).toBe("13");
+		});
+
+		it("ignores the delay when the typography changed", () => {
+			engine.apply(spec("13"), fixedWidthTypesetter("bold"), 0.1);
+			expect(engine.isWaiting).toBe(false);
+			expect(visibleText(engine)).toBe("13");
+		});
+
+		it("applies a change that keeps the text at once", () => {
+			engine.apply(
+				spec("12", { alignment: GlyphRollAlignment.Trailing }),
+				typesetter,
+				0.1,
+			);
+			expect(engine.isWaiting).toBe(false);
+			expect(engine.alignment).toBe(GlyphRollAlignment.Trailing);
+		});
+
+		it("applies other fields at once while a value waits, and keeps them for it", () => {
+			engine.apply(spec("13"), typesetter, 0.1);
+			engine.tick(FRAME);
+			engine.apply(
+				spec("13", { alignment: GlyphRollAlignment.Trailing }),
+				typesetter,
+				0.1,
+			);
+			expect(engine.isWaiting).toBe(true);
+			expect(engine.alignment).toBe(GlyphRollAlignment.Trailing);
+			expect(visibleText(engine)).toBe("12");
+
+			for (let frame = 0; frame < 6; frame++) engine.tick(FRAME);
+			expect(visibleText(engine)).toBe("13");
+			expect(engine.alignment).toBe(GlyphRollAlignment.Trailing);
+		});
+
+		it("drops a waiting value when the value returns to the one shown", () => {
+			engine.apply(spec("13"), typesetter, 0.1);
+			engine.apply(spec("12"), typesetter, 0.1);
+			expect(engine.isWaiting).toBe(false);
+			settle(engine);
+			expect(visibleText(engine)).toBe("12");
+		});
+
+		it("ignores the delay for the first value", () => {
+			const fresh = new GlyphTransitionEngine();
+			fresh.apply(spec("7"), typesetter, 0.1);
+			expect(fresh.isWaiting).toBe(false);
+			expect(visibleText(fresh)).toBe("7");
+		});
+	});
 });

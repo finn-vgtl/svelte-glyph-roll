@@ -4,6 +4,10 @@ All notable changes to `svelte-glyph-roll` are documented here. The format is ba
 
 ## [Unreleased]
 
+### Added
+
+- `delay` prop: how many milliseconds a new `value` waits before it starts animating, from `0` to `1000`. Other props, such as `alignment`, still apply at once. Give components that change together increasing delays to stagger them, e.g. `delay={column * 40}` on the totals in a table footer. A value that changes again while waiting replaces the waiting one without restarting the delay, and screen readers get the new value straight away.
+
 ## [0.6.0] - 2026-11-03
 
 ### Breaking changes

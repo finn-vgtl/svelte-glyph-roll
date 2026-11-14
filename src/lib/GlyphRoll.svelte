@@ -32,6 +32,7 @@ surrounding CSS.
 	const MAX_ENTER_SCALE = 2;
 	const MAX_TRAVEL_RATIO = 3;
 	const MAX_BOUNCE = 0.95;
+	const MAX_DELAY = 1000;
 	const MILLISECONDS_PER_SECOND = 1000;
 
 	const clamp = (value: number, min: number, max: number): number =>
@@ -43,6 +44,7 @@ surrounding CSS.
 		decimalSeparator,
 		direction,
 		duration,
+		delay,
 		bounce,
 		enterScale,
 		travel,
@@ -97,6 +99,10 @@ surrounding CSS.
 		bounce: clamp(bounce ?? TransitionSprings.DEFAULT_BOUNCE, 0, MAX_BOUNCE),
 	});
 
+	const delaySeconds = $derived(
+		delay == null ? 0 : clamp(delay, 0, MAX_DELAY) / MILLISECONDS_PER_SECOND,
+	);
+
 	const sizeStyle = $derived(
 		contentSize
 			? `width: ${contentSize.width}px; height: ${contentSize.height}px;`
@@ -117,7 +123,7 @@ surrounding CSS.
 	});
 
 	$effect(() => {
-		label?.update(spec);
+		label?.update(spec, delaySeconds);
 	});
 </script>
 
