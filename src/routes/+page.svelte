@@ -9,6 +9,7 @@
 	import Inline from "../site/examples/Inline.svelte";
 	import PriceTicker from "../site/examples/PriceTicker.svelte";
 	import Status from "../site/examples/Status.svelte";
+	import TableFooter from "../site/examples/TableFooter.svelte";
 	import Weather from "../site/examples/Weather.svelte";
 	import InstallCommand from "../site/InstallCommand.svelte";
 	import Playground from "../site/Playground.svelte";
@@ -21,6 +22,7 @@
 		PRICE_EXAMPLE,
 		QUICK_START,
 		STATUS_EXAMPLE,
+		TABLE_FOOTER_EXAMPLE,
 		WEATHER_EXAMPLE,
 	} from "../site/snippets";
 
@@ -88,6 +90,15 @@
 				"Glyphs are split into grapheme clusters, so an emoji built from several code points rolls as one piece and never breaks apart mid-transition.",
 			demo: Weather,
 			code: WEATHER_EXAMPLE,
+		},
+		{
+			id: "table-footer",
+			title: "Staggered table totals",
+			file: "TableFooter.svelte",
+			description:
+				"When a row changes, every total in the footer changes with it. Increasing delays let the edited row roll first and the totals follow one after another, instead of all at once.",
+			demo: TableFooter,
+			code: TABLE_FOOTER_EXAMPLE,
 		},
 		{
 			id: "inline",
@@ -201,7 +212,7 @@
 					<div class="example-body">
 						<h3 id="example-{example.id}">{example.title}</h3>
 						<p>{example.description}</p>
-						<CodeBlock code={example.code} title={example.file} />
+						<CodeBlock code={example.code} title={example.file} maxHeight="24rem" />
 					</div>
 				</article>
 			{/each}
