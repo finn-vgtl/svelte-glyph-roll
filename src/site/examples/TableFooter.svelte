@@ -11,17 +11,23 @@
 		{ region: "West", orders: 87, units: 214, revenue: 11530 },
 	]);
 
-	// One region takes new orders, so its row and every total change at once.
+	// Every region takes new orders at once, so every cell and every total changes together.
 	$effect(() => {
 		const id = setInterval(() => {
-			const row = rows[Math.floor(Math.random() * rows.length)];
-			const orders = 1 + Math.floor(Math.random() * 4);
-			row.orders += orders;
-			row.units += orders * (1 + Math.floor(Math.random() * 3));
-			row.revenue += orders * (40 + Math.floor(Math.random() * 120));
-		}, 1800);
+			for (const row of rows) {
+				const orders = 1 + Math.floor(Math.random() * 4);
+				row.orders += orders;
+				row.units += orders * (1 + Math.floor(Math.random() * 3));
+				row.revenue += orders * (40 + Math.floor(Math.random() * 120));
+			}
+		}, 2400);
 		return () => clearInterval(id);
 	});
+
+	// Each cell waits one step per row and one per column, so the change sweeps diagonally from
+	// the top-left cell down to the last total. Exaggerated to make the stagger easy to see.
+	const STEP = 90;
+	const delay = (row: number, column: number) => (row + column) * STEP;
 
 	const totals = $derived(
 		columns.map((column) => rows.reduce((sum, row) => sum + row[column], 0)),
@@ -48,12 +54,17 @@
 		</tr>
 	</thead>
 	<tbody>
-		{#each rows as row (row.region)}
+		{#each rows as row, rowIndex (row.region)}
 			<tr>
 				<th scope="row">{row.region}</th>
-				{#each columns as column (column)}
+				{#each columns as column, columnIndex (column)}
 					<td>
-						<GlyphRoll value={format(column, row[column])} alignment="end" monospacedDigits />
+						<GlyphRoll
+							value={format(column, row[column])}
+							delay={delay(rowIndex, columnIndex)}
+							alignment="end"
+							monospacedDigits
+						/>
 					</td>
 				{/each}
 			</tr>
@@ -62,12 +73,12 @@
 	<tfoot>
 		<tr>
 			<th scope="row">Total</th>
-			{#each columns as column, index (column)}
-				<!-- The edited row rolls first, then the totals follow 60 ms apart. -->
+			{#each columns as column, columnIndex (column)}
+				<!-- The footer is the row after the last one, so the totals land last. -->
 				<td>
 					<GlyphRoll
-						value={format(column, totals[index])}
-						delay={(index + 1) * 60}
+						value={format(column, totals[columnIndex])}
+						delay={delay(rows.length, columnIndex)}
 						alignment="end"
 						monospacedDigits
 					/>
