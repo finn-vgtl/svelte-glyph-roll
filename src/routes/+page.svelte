@@ -93,10 +93,10 @@
 		},
 		{
 			id: "table-footer",
-			title: "Staggered table totals",
+			title: "Staggered table",
 			file: "TableFooter.svelte",
 			description:
-				"When a row changes, every total in the footer changes with it. Increasing delays let the edited row roll first and the totals follow one after another, instead of all at once.",
+				"Every cell and every total changes at once. A delay that grows by row and by column turns that into a wave sweeping from the top-left cell down to the totals. The steps are exaggerated here; in a real table, keep the whole spread short.",
 			demo: TableFooter,
 			code: TABLE_FOOTER_EXAMPLE,
 		},
