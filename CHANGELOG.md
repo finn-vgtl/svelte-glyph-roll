@@ -4,6 +4,8 @@ All notable changes to `svelte-glyph-roll` are documented here. The format is ba
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-15
+
 ### Added
 
 - `delay` prop: how many milliseconds a new `value` waits before it starts animating, from `0` to `1000`. Other props, such as `alignment`, still apply at once. Give components that change together increasing delays to stagger them, e.g. `delay={column * 40}` on the totals in a table footer. A value that changes again while waiting replaces the waiting one without restarting the delay, and screen readers get the new value straight away.
@@ -77,7 +79,8 @@ All notable changes to `svelte-glyph-roll` are documented here. The format is ba
 
 - `NumericText`, a Svelte 5 port of the web renderer from [expo-content-transition](https://github.com/rit3zh/expo-content-transition): per-glyph, spring-animated transitions for changing numbers and text.
 
-[Unreleased]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.7.0...HEAD
+[0.7.0]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.6.0...v0.7.0
 [0.6.0]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.4.1...v0.5.0
 [0.4.1]: https://github.com/finn-vgtl/svelte-glyph-roll/compare/v0.4.0...v0.4.1
