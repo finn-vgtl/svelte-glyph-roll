@@ -15,7 +15,11 @@ const QUICK_START = `<script lang="ts">
 	let count = $state(0);
 </script>
 
-<GlyphRoll value={count} style="font-size: 48px" monospacedDigits />
+<GlyphRoll
+	value={count}
+	style="font-size: 48px"
+	monospacedDigits
+/>
 
 <button onclick={() => count++}>Increment</button>`;
 
